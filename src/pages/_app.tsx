@@ -6,7 +6,7 @@ import {
   LogoutUserMutation,
   MeDocument,
   MeQuery,
-  RegisterUserMutation
+  RegisterUserMutation,
 } from '../generated/graphql';
 import theme from '../theme';
 
@@ -16,13 +16,13 @@ const betterUpdateQuery = <Result, Query>(
   result: any,
   fn: (r: Result, q: Query) => Query
 ) => {
-  cache.updateQuery(qi, data => fn(result, data as any) as any);
+  cache.updateQuery(qi, (data) => fn(result, data as any) as any);
 };
 
 const client = createClient({
   url: 'http://localhost:4000/graphql',
   fetchOptions: {
-    credentials: 'include'
+    credentials: 'include',
   },
   exchanges: [
     dedupExchange,
@@ -58,12 +58,12 @@ const client = createClient({
                 return { me: result.register.user };
               }
             );
-          }
-        }
-      }
+          },
+        },
+      },
     }),
-    fetchExchange
-  ]
+    fetchExchange,
+  ],
 });
 
 function MyApp({ Component, pageProps }: any) {
